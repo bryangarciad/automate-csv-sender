@@ -1,4 +1,4 @@
-console.log( 'Starting autoamte send' );
+console.log( 'Starting automated send' );
 
 // # DEV
 const CARBON_HOST = 'https://cms.dev.carbon.motortrend.com/';
@@ -42,6 +42,14 @@ const run = async () => {
     }
 }
 
+function delay(delayInms) {
+    return new Promise(resolve => {
+      setTimeout(() => {
+        resolve(2);
+      }, delayInms);
+    });
+  }
+
 const sendFile = async (csvFile) => { 
     const formData = new FormData()
     formData.set('csv', csvFile);
@@ -52,6 +60,7 @@ const sendFile = async (csvFile) => {
         console.log(url);
         const res = await axios.post(url, formData )
         console.log(res);
+        await delay(20000);
 
     } catch (err) {
         console.log(err);
